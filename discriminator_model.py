@@ -64,7 +64,8 @@ class Discriminator(nn.Module):
 
     def forward(self, x):
         x = self.initial(x)
-        return torch.sigmoid(self.model(x))
+        #return torch.sigmoid(self.model(x))
+        return self.model(x)  # no sigmoid
 
 
 def test():

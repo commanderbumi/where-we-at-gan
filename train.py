@@ -72,10 +72,10 @@ def train_fn(
    
    
  	 	    # identity loss (remove these for efficiency if you set lambda_identity=0)
-            identity_UK = gen_U(UK)
-            identity_japan = gen_J(japan)
-            identity_UK_loss = l1(UK, identity_UK)
-            identity_japan_loss = l1(japan, identity_japan)
+            #identity_UK = gen_U(UK)
+            #identity_japan = gen_J(japan)
+            #identity_UK_loss = l1(UK, identity_UK)
+            #identity_japan_loss = l1(japan, identity_japan)
    
    
  	 	    # add all togethor
@@ -84,8 +84,8 @@ def train_fn(
  	 	 	   + loss_G_J
  	 	 	   + cycle_UK_loss * config.LAMBDA_CYCLE
  	 	 	   + cycle_japan_loss * config.LAMBDA_CYCLE
- 	 	 	   + identity_japan_loss * config.LAMBDA_IDENTITY
- 	 	 	   + identity_UK_loss * config.LAMBDA_IDENTITY
+ 	 	 	   #+ identity_japan_loss * config.LAMBDA_IDENTITY
+ 	 	 	   #+ identity_UK_loss * config.LAMBDA_IDENTITY
  	 	    )
   
   
@@ -126,7 +126,9 @@ def main():
  
  
     L1 = nn.L1Loss()
-    mse = nn.MSELoss()
+    #mse = nn.MSELoss()
+    mse = nn.BCEWithLogitsLoss()  # better for GANs, assumes logits (no sigmoid!)
+
  
  
     if config.LOAD_MODEL:
