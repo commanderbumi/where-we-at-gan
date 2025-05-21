@@ -12,7 +12,7 @@ class Block(nn.Module):
                 kernel_size=4, 
                 stride=stride, 
                 padding=1,
-                bias=True, # In CycleGAN paper, bias is often False when using InstanceNorm
+                bias=True, #in cycleGAN paper bias is often False when using InstanceNorm
                 padding_mode="reflect",
             )),
             nn.InstanceNorm2d(out_channels),
@@ -26,7 +26,7 @@ class Block(nn.Module):
 class Discriminator(nn.Module):
     def __init__(self, in_channels=3, features=[64, 128, 256, 512]):
         super().__init__()
-        # Apply spectral_norm to the initial Conv2d layer
+        #spectral norm for the initial Conv2d layer
         self.initial = nn.Sequential(
             spectral_norm(nn.Conv2d(
                 in_channels,
@@ -48,13 +48,13 @@ class Discriminator(nn.Module):
             )
             current_in_channels = feature
 
-        # Apply spectral_norm to the final Conv2d layer
+        #spectral norm for the final Conv2d layer
         layers.append(
             spectral_norm(nn.Conv2d(
-                current_in_channels, # Use the updated in_channels from the loop
-                1, # Output 1 channel for PatchGAN
+                current_in_channels, #use the updated in_channels from the loop
+                1, #output 1 channel for PatchGAN
                 kernel_size=4,
-                stride=1, # Stride 1 for the last conv layer before sigmoid
+                stride=1, #stride 1 for the last conv layer
                 padding=1,
                 padding_mode="reflect",
                 bias=True 
@@ -65,7 +65,7 @@ class Discriminator(nn.Module):
     def forward(self, x):
         x = self.initial(x)
         #return torch.sigmoid(self.model(x))
-        return self.model(x)  # no sigmoid
+        return self.model(x)  #no sigmoid
 
 
 def test():
