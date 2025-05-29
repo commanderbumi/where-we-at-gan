@@ -63,10 +63,10 @@ def train_fn(
             cycle_japan_loss = l1(japan, cycle_japan)
    
  	 	    #identity loss doesnt matter if lambda identity is 0
-            '''identity_UK = gen_U(UK)
+            identity_UK = gen_U(UK)
             identity_japan = gen_J(japan)
             identity_UK_loss = l1(UK, identity_UK)
-            identity_japan_loss = l1(japan, identity_japan)'''
+            identity_japan_loss = l1(japan, identity_japan)
             
             G_loss = (
  	 	 	   loss_G_U
